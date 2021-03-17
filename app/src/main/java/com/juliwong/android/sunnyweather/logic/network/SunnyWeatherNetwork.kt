@@ -3,6 +3,7 @@ package com.juliwong.android.sunnyweather.logic.network
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.await
 import java.lang.RuntimeException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -12,9 +13,14 @@ object SunnyWeatherNetwork {
 
     // 1.创建PlaceService接口的动态代理对象
     private val placeService = ServiceCreator.create<PlaceService>()
+    private val weatherService = ServiceCreator.create<WeatherService>()
 
     // 2.定义searchPlaces()函数，并调用PlaceService接口的searchPlaces()
     suspend fun searchPlaces(query: String) = placeService.searchPlaces(query).await()
+    suspend fun getRealtimeWeather(lng: String, lat: String) =
+        weatherService.getRealtimeWeather(lng, lat).await()
+    suspend fun getDailyWeather(lng: String, lat: String) =
+        weatherService.getDailyWeather(lng, lat).await()
 
     // 3.简化Retrofit回调
     private suspend fun <T> Call<T>.await(): T {
@@ -24,7 +30,7 @@ object SunnyWeatherNetwork {
                     val body = response.body()
                     if (body != null) continuation.resume(body)
                     else continuation.resumeWithException(
-                            RuntimeException("response body is null")
+                        RuntimeException("response body is null")
                     )
                 }
 

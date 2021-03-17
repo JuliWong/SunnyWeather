@@ -1,4 +1,4 @@
-package com.juliwong.android.sunnyweather.logic.model
+package com.juliwong.android.sunnyweather.logic.model.place
 
 import com.google.gson.annotations.SerializedName
 

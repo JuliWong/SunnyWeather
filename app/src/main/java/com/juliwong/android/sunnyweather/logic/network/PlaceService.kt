@@ -1,7 +1,7 @@
 package com.juliwong.android.sunnyweather.logic.network
 
 import com.juliwong.android.sunnyweather.SunnyWeatherApplication
-import com.juliwong.android.sunnyweather.logic.model.PlaceResponse
+import com.juliwong.android.sunnyweather.logic.model.place.PlaceResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
